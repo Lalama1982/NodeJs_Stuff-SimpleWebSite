@@ -26,7 +26,7 @@ const replaceTemplate = (temp, product) => {
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data);
 
-const slugs = dataObj.map(el => slugify(el.productName, { lower: true }));
+const slugs = dataObj.map((el) => slugify(el.productName, { lower: true }));
 console.log(slugs);
 console.log(slugify('Fresh Avocados', { lower: true }));
 
@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
     // html file "template-card.html" is passed as "tempCard"
     // each value in the json file "dataObj" are sent to ext. function "replaceTemplate" one by one (via map())
     //const cardsHtml = dataObj.map(el => replaceTemplate(tempCard,el)).join(''); // internal
-    const cardsHtml = dataObj.map(el => replaceTemplateExtjs(tempCard, el)).join(''); // external
+    const cardsHtml = dataObj.map((el) => replaceTemplateExtjs(tempCard, el)).join(''); // external
     const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHtml); // using filled "tempCard", place holder "PRODUCT_CARDS" in
     // ... "tempOverview" html page is replaced
 
@@ -91,14 +91,14 @@ const server = http.createServer((req, res) => {
     // below allow, html based formatting & actions to be implemented
     res.writeHead(404, {
       'Content-type': 'text/html',
-      'my-own-header': 'hello-world'
+      'my-own-header': 'hello-world',
     });
     res.end('<h1>Page not found!</h1>');
   }
 });
 
-server.listen(8000, '127.0.0.1', () => {
-  console.log('Listening to requests on port 8000');
+server.listen(3456, () => {
+  console.log('Listening to requests on port 3456');
 });
 
 // call in as "http://127.0.0.1:8000/" from a browser
